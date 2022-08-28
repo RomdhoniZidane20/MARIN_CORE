@@ -22,7 +22,7 @@ const uint8_t DXL_ID      =      200; // ID Dynamixel
 //State
 //bool dxl_power_is;
 volatile int start_button_state = 0;
-volatile int stop_button_state = 0;
+volatile int stop_button_state  = 0;
 
 //Dynamixel Arduino porthandler and packethandler
 DYNAMIXEL::SerialPortHandler dxl_port(DXL_SERIAL, DXL_DIR_PIN);
@@ -108,15 +108,32 @@ void loop() {
     DEBUG_SERIAL.println();
 
   }
+  imu::Vector<3> Orientation = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
+  imu::Vector<3> Accel = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
+  imu::Vector<3> Gyro  = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
+  
+  //  YPR value
+  ypr[0]  = Orientation.x();
+  ypr[1]  = Orientation.y();
+  ypr[2]  = Orientation.z();
+
+  //  Accelerometer Value
+  accel[0]    = Accel.x();
+  accel[1]    = Accel.y();
+  accel[2]    = Accel.z();
+
+  //  Gyro Value
+  gyro[0]    = Gyro.x();
+  gyro[1]    = Gyro.y();
+  gyro[2]    = Gyro.z();
+
+  uint8_t system, gyro, accel = 0;
+  bno.Calibration_no_mag(&system, &gyro, &accel);
 }
 
 void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
 {
   (void)dxl_err_code, (void)arg;
-
-  imu::Vector<3> Orientation = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
-  imu::Vector<3> Accel = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
-  imu::Vector<3> Gyro  = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
 
   if (item_addr == SW_Start_addr)
   {
@@ -129,53 +146,54 @@ void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
     stop_button_state = digitalRead(SW_Stop);
     Switch_Button[1] = stop_button_state;
   }
-  if (item_addr == Yaw_addr)
-  {
-    ypr[0] = Orientation.x();
-  }
 
-  if (item_addr == Pitch_addr)
-  {
-    ypr[1] = Orientation.y();
-  }
+  // if (item_addr == Yaw_addr)
+  // {
+  //   ypr[0] = Orientation.x();
+  // }
 
-  if (item_addr == Roll_addr)
-  {
-    ypr[2] = Orientation.z();
-  }
+  // if (item_addr == Pitch_addr)
+  // {
+  //   ypr[1] = Orientation.y();
+  // }
 
-  if (item_addr == AccelX_addr)
-  {
-    accel[0] = Accel.x();
-  }
+  // if (item_addr == Roll_addr)
+  // {
+  //   ypr[2] = Orientation.z();
+  // }
 
-  if (item_addr == AccelY_addr)
-  {
-    accel[1] = Accel.y();
-  }
+  // if (item_addr == AccelX_addr)
+  // {
+  //   accel[0] = Accel.x();
+  // }
 
-  if (item_addr == AccelZ_addr)
-  {
-    accel[2] = Accel.z();
-  }
+  // if (item_addr == AccelY_addr)
+  // {
+  //   accel[1] = Accel.y();
+  // }
 
-  if (item_addr == GyroX_addr)
-  {
-    gyro[0] = Gyro.x();
-  }
+  // if (item_addr == AccelZ_addr)
+  // {
+  //   accel[2] = Accel.z();
+  // }
 
-  if (item_addr == GyroY_addr)
-  {
-    gyro[1] = Gyro.y();
-  }
+  // if (item_addr == GyroX_addr)
+  // {
+  //   gyro[0] = Gyro.x();
+  // }
 
-  if (item_addr == GyroZ_addr)
-  {
-    gyro[2] = Gyro.x();
-  }
+  // if (item_addr == GyroY_addr)
+  // {
+  //   gyro[1] = Gyro.y();
+  // }
 
-  uint8_t system, gyro, accel = 0;
-  bno.Calibration_no_mag(&system, &gyro, &accel);
+  // if (item_addr == GyroZ_addr)
+  // {
+  //   gyro[2] = Gyro.x();
+  // }
+
+  // uint8_t system, gyro, accel = 0;
+  // bno.Calibration_no_mag(&system, &gyro, &accel);
 }
 
 

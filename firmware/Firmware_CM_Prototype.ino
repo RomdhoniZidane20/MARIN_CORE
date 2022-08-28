@@ -55,13 +55,9 @@ double ypr[3];
 double accel[3];
 double gyro[3];
 
-
 //This namespace is required to use Control table item names
 using namespace ControlTableItem;
 
-
-//void StartButton();
-//void StopButton();
 
 void setup() {
 
@@ -73,12 +69,6 @@ void setup() {
   pinMode(SW_Start, INPUT);
   pinMode(SW_Stop, INPUT);
   pinMode(Dxl_power, OUTPUT);
-
-  digitalWrite(Dxl_power, HIGH);
-
-
-  //  attachInterrupt(SW_Start, StartButton, FALLING);
-  //  attachInterrupt(SW_Stop, StopButton, FALLING);
 
   dxl_port.begin(1000000);
   dxl.setPortProtocolVersion(DXL_PROTOCOL_VER_1_0);
@@ -123,6 +113,7 @@ void loop() {
 void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
 {
   (void)dxl_err_code, (void)arg;
+
   imu::Vector<3> Orientation = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
   imu::Vector<3> Accel = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
   imu::Vector<3> Gyro  = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);

@@ -51,9 +51,9 @@ uint8_t Switch_Button[2];
 uint8_t dxl_power_enable;
 
 //Stored variable for imu
-float ypr[3];
-float accel[3];
-float gyro[3];
+int16_t ypr[3];
+int16_t accel[3];
+int16_t gyro[3];
 
 //This namespace is required to use Control table item names
 using namespace ControlTableItem;
@@ -115,8 +115,8 @@ void loop() {
   
   //  YPR value
   ypr[0]  = Orientation.x();
-  ypr[1]  = Orientation.y();
-  ypr[2]  = Orientation.z();
+  ypr[1]  = Orientation.y() + 90;
+  ypr[2]  = Orientation.z() + 180;
 
   //  Accelerometer Value
   accel[0]    = Accel.x();

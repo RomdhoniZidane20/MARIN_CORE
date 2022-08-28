@@ -51,9 +51,9 @@ uint8_t Switch_Button[2];
 uint8_t dxl_power_enable;
 
 //Stored variable for imu
-double ypr[3];
-double accel[3];
-double gyro[3];
+float ypr[3];
+float accel[3];
+float gyro[3];
 
 //This namespace is required to use Control table item names
 using namespace ControlTableItem;
@@ -108,6 +108,7 @@ void loop() {
     DEBUG_SERIAL.println();
 
   }
+
   imu::Vector<3> Orientation = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
   imu::Vector<3> Accel = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
   imu::Vector<3> Gyro  = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);

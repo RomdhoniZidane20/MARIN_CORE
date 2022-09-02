@@ -5,7 +5,7 @@
 #include <utility/imumaths.h>
 
 //IMU variables
-uint16_t BNO055_SAMPLERATE_DELAY_MS = 0;
+uint16_t BNO055_SAMPLERATE_DELAY_MS = 20;
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
 
 // Dynamixel Arduino define pin for CM
@@ -18,6 +18,11 @@ const uint8_t DXL_ID      =      200; // ID Dynamixel
 #define SW_Start                 34
 #define SW_Stop                  35
 #define Dxl_power                32
+
+// Pinout for LED
+#define LED_Red_enable           12
+#define LED_Green_enable         13
+#define LED_Blue_enable          14
 
 //State
 //bool dxl_power_is;
@@ -45,15 +50,21 @@ uint16_t AccelZ_addr      = 88;
 uint16_t GyroX_addr       = 92;
 uint16_t GyroY_addr       = 96;
 uint16_t GyroZ_addr       = 100;
+uint16_t LED_R_addr       = 104;
+uint16_t LED_G_addr       = 108;
+uint16_t LED_B_addr       = 112;
 
-//Stored variables for Interrupt
+// Stored variables for Interrupt
 uint8_t Switch_Button[2];
 uint8_t dxl_power_enable;
 
-//Stored variable for imu
-int16_t ypr[3];
-int16_t accel[3];
-int16_t gyro[3];
+// Stored variable for imu
+uint16_t ypr[3];
+uint16_t accel[3];
+uint16_t gyro[3];
+
+// Store variable for LED
+uint8_t led[3];
 
 //This namespace is required to use Control table item names
 using namespace ControlTableItem;
@@ -87,6 +98,9 @@ void setup() {
   dxl.addControlItem(GyroX_addr, gyro[0]);
   dxl.addControlItem(GyroY_addr, gyro[1]);
   dxl.addControlItem(GyroZ_addr, gyro[2]);
+  dxl.addControlItem(LED_R_addr, led[0]);
+  dxl.addControlItem(LED_G_addr, led[1]);
+  dxl.addControlItem(LED_B_addr, led[2]);
   //  dxl.addControlItem(LED_addr, Led_Esp)
 
   dxl.setReadCallbackFunc(read_callback_func);
@@ -112,7 +126,7 @@ void loop() {
   imu::Vector<3> Orientation = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
   imu::Vector<3> Accel = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
   imu::Vector<3> Gyro  = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
-  
+
   //  YPR value
   ypr[0]  = Orientation.x();
   ypr[1]  = Orientation.y() + 90;
@@ -147,6 +161,7 @@ void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
     stop_button_state = digitalRead(SW_Stop);
     Switch_Button[1] = stop_button_state;
   }
+
 
   // if (item_addr == Yaw_addr)
   // {
@@ -206,5 +221,20 @@ void write_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
   {
     digitalWrite(Dxl_power, dxl_power_enable);
     Serial.print(dxl_power_enable);
+  }
+
+  if (item_addr == LED_R_addr)
+  {
+    digitalWrite(led[0], LED_Red_enable);
+  }
+
+  if (item_addr == LED_G_addr)
+  {
+    digitalWrite(led[1], LED_Green_enable);
+  }
+
+  if (item_addr == LED_B_addr)
+  {
+    digitalWrite(led[2], LED_Blue_enable);
   }
 }

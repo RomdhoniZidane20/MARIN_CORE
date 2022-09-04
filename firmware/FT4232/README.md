@@ -2,6 +2,7 @@
 
 ## Flash to correct EEPROM:
 Install drivers from https://www.ftdichip.com/Drivers/D2XX.htm 
+
 Unpack them:
 ```tar -xvf libftd2xx-x86_64-1.4.xx.gz```
 

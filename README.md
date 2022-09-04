@@ -2,7 +2,7 @@
 
 ## Include Hardware and Software setup for dxl_board
 
-[FT4232] (https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/FT4232)
+Documentations for [FT4232_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/FT4232)
 
-[ESP32] (https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/Firmware_CM_Prototype)
+Documentations fot [ESP32_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/Firmware_CM_Prototype)
 

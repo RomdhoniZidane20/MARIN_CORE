@@ -1,3 +1,7 @@
 # ichiro_dxl_board
 
-Prototype for dxl_board based on Dynamixel2Arduino API
+## Include Hardware and Software setup for dxl_board
+
+[FT4232]
+[ESP32]
+

@@ -44,8 +44,8 @@ int main(int argc, char *argv[])
 	Data.ProductId = 0x6001;
 	Data.Manufacturer =  "FTDI";
 	Data.ManufacturerId = "FT";
-	Data.Description = "USB <-> Serial";
-	Data.SerialNumber = "FTDI_ICHIRO";		// if fixed, or NULL
+	Data.Description = "FT <-> ICHIRO";
+	Data.SerialNumber = NULL;		// if fixed, or NULL
 	
 	Data.MaxPower = 44;
 	Data.PnP = 1;

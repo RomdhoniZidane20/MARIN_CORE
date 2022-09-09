@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 	Data.Manufacturer =  "FTDI";
 	Data.ManufacturerId = "FT";
 	Data.Description = "FT <-> ICHIRO";
-	Data.SerialNumber = NULL;		// if fixed, or NULL
+	Data.SerialNumber = NULL;			// if fixed, or NULL
 	
 	Data.MaxPower = 44;
 	Data.PnP = 1;

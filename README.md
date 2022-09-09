@@ -4,5 +4,5 @@
 
 Documentations for [FT4232_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/FT4232)
 
-Documentations fot [ESP32_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/Firmware_CM_Prototype)
+Documentations for [ESP32_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/Firmware_CM_Prototype)
 

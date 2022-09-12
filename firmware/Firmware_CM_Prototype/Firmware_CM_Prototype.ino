@@ -5,7 +5,7 @@
 #include <utility/imumaths.h>
 
 //IMU variables
-uint16_t BNO055_SAMPLERATE_DELAY_MS = 20;
+uint16_t BNO055_SAMPLERATE_DELAY_MS = 0;
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
 
 // Dynamixel Arduino define pin for CM
@@ -106,7 +106,7 @@ void setup() {
   dxl.setReadCallbackFunc(read_callback_func);
   dxl.setWriteCallbackFunc(write_callback_func);
 
-  delay(1000);
+//  delay();
 
 }
 

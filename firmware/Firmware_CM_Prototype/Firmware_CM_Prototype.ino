@@ -162,7 +162,6 @@ void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
     Switch_Button[1] = stop_button_state;
   }
 
-
   if (item_addr == Yaw_addr)
   {
     ypr[0];
@@ -208,8 +207,6 @@ void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
     gyro[2];
   }
 
-  // uint8_t system, gyro, accel = 0;
-  // bno.Calibration_no_mag(&system, &gyro, &accel);
 }
 
 

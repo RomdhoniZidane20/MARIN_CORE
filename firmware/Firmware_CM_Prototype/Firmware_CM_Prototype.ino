@@ -33,7 +33,7 @@ volatile int stop_button_state  = 0;
 DYNAMIXEL::SerialPortHandler dxl_port(DXL_SERIAL, DXL_DIR_PIN);
 const float DXL_PROTOCOL_VER_1_0 = 1.0;
 const float DXL_PROTOCOL_VER_2_0 = 2.0;
-const uint16_t DXL_MODEL_NUM     = 0x190; // OpenCM 9.04 model number
+const uint16_t DXL_MODEL_NUM     = 0x136; // OpenCM 9.04 model number
 DYNAMIXEL::Slave dxl(dxl_port, DXL_MODEL_NUM);
 
 
@@ -83,7 +83,7 @@ void setup() {
 
   dxl_port.begin(1000000);
   dxl.setPortProtocolVersion(DXL_PROTOCOL_VER_1_0);
-  dxl.setFirmwareVersion(1);
+  dxl.setFirmwareVersion(25);
   dxl.setID(DXL_ID);
 
   dxl.addControlItem(SW_Start_addr, Switch_Button[0]);
@@ -163,50 +163,50 @@ void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
   }
 
 
-  // if (item_addr == Yaw_addr)
-  // {
-  //   ypr[0] = Orientation.x();
-  // }
+  if (item_addr == Yaw_addr)
+  {
+    ypr[0];
+  }
 
-  // if (item_addr == Pitch_addr)
-  // {
-  //   ypr[1] = Orientation.y();
-  // }
+  if (item_addr == Pitch_addr)
+  {
+    ypr[1];
+  }
 
-  // if (item_addr == Roll_addr)
-  // {
-  //   ypr[2] = Orientation.z();
-  // }
+  if (item_addr == Roll_addr)
+  {
+    ypr[2];
+  }
 
-  // if (item_addr == AccelX_addr)
-  // {
-  //   accel[0] = Accel.x();
-  // }
+  if (item_addr == AccelX_addr)
+  {
+    accel[0];
+  }
 
-  // if (item_addr == AccelY_addr)
-  // {
-  //   accel[1] = Accel.y();
-  // }
+  if (item_addr == AccelY_addr)
+  {
+    accel[1];
+  }
 
-  // if (item_addr == AccelZ_addr)
-  // {
-  //   accel[2] = Accel.z();
-  // }
+  if (item_addr == AccelZ_addr)
+  {
+    accel[2];
+  }
 
-  // if (item_addr == GyroX_addr)
-  // {
-  //   gyro[0] = Gyro.x();
-  // }
+  if (item_addr == GyroX_addr)
+  {
+    gyro[0];
+  }
 
-  // if (item_addr == GyroY_addr)
-  // {
-  //   gyro[1] = Gyro.y();
-  // }
+  if (item_addr == GyroY_addr)
+  {
+    gyro[1];
+  }
 
-  // if (item_addr == GyroZ_addr)
-  // {
-  //   gyro[2] = Gyro.x();
-  // }
+  if (item_addr == GyroZ_addr)
+  {
+    gyro[2];
+  }
 
   // uint8_t system, gyro, accel = 0;
   // bno.Calibration_no_mag(&system, &gyro, &accel);

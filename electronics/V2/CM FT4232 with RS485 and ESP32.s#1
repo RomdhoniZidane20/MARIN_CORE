@@ -8291,6 +8291,14 @@ DIN A3, landscape with extra doc field</description>
 <part name="R44" library="rcl" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="2K"/>
 <part name="VDD9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="FRAME1" library="frames" deviceset="DINA3_L" device=""/>
+<part name="Q1" library="Vishay_FET" deviceset="SQM40P10-40L_GE3" device=""/>
+<part name="BATT_CM2" library="AMASS_XT60" deviceset="XT60PW-M" device=""/>
+<part name="F1" library="fuse" deviceset="SHK20L" device="" package3d_urn="urn:adsk.eagle:package:14071/1"/>
+<part name="R45" library="rcl" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="10K"/>
+<part name="X1" library="con-molex" deviceset="22-23-2021" device="" package3d_urn="urn:adsk.eagle:package:8078633/1"/>
+<part name="LED_SERVO1" library="led" deviceset="LED" device="CHIPLED_0805" package3d_urn="urn:adsk.eagle:package:15821/2"/>
+<part name="R46" library="rcl" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="2K"/>
+<part name="VDD10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -9919,6 +9927,113 @@ DIN A3, landscape with extra doc field</description>
 <pinref part="U$1" gate="G$1" pin="IO21"/>
 <wire x1="127" y1="96.52" x2="129.54" y2="96.52" width="0.1524" layer="91" grouprefs="ESP32_TO_485/TTL_AND_INTERFACES"/>
 <label x="129.54" y="96.52" size="1.778" layer="95" grouprefs="ESP32_TO_485/TTL_AND_INTERFACES"/>
+</segment>
+</net>
+</nets>
+</sheet>
+<sheet>
+<plain>
+</plain>
+<instances>
+<instance part="Q1" gate="G$1" x="55.88" y="85.09" smashed="yes" rot="R90">
+<attribute name="NAME" x="55.88" y="88.9" size="1" layer="95" ratio="10" rot="R180" align="center"/>
+</instance>
+<instance part="BATT_CM2" gate="G$1" x="7.62" y="82.55" smashed="yes">
+<attribute name="NAME" x="7.62" y="91.44" size="1" layer="95" ratio="10" align="center"/>
+</instance>
+<instance part="F1" gate="G$1" x="68.58" y="85.09" smashed="yes">
+<attribute name="NAME" x="64.77" y="86.487" size="1.778" layer="95"/>
+<attribute name="VALUE" x="64.77" y="82.169" size="1.778" layer="96"/>
+</instance>
+<instance part="R45" gate="G$1" x="48.26" y="77.47" smashed="yes">
+<attribute name="NAME" x="44.45" y="78.9686" size="1.778" layer="95"/>
+<attribute name="VALUE" x="44.45" y="74.168" size="1.778" layer="96"/>
+</instance>
+<instance part="X1" gate="-1" x="60.96" y="77.47" smashed="yes"/>
+<instance part="X1" gate="-2" x="60.96" y="74.93" smashed="yes"/>
+<instance part="LED_SERVO1" gate="G$1" x="78.74" y="80.01" smashed="yes">
+<attribute name="NAME" x="82.296" y="75.438" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="84.455" y="75.438" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R46" gate="G$1" x="71.12" y="72.39" smashed="yes">
+<attribute name="NAME" x="67.31" y="73.8886" size="1.778" layer="95"/>
+<attribute name="VALUE" x="67.31" y="69.088" size="1.778" layer="96"/>
+</instance>
+<instance part="VDD10" gate="G$1" x="78.74" y="91.44" smashed="yes">
+<attribute name="VALUE" x="76.2" y="88.9" size="1.778" layer="96" rot="R90"/>
+</instance>
+</instances>
+<busses>
+</busses>
+<nets>
+<net name="GND" class="0">
+<segment>
+<pinref part="BATT_CM2" gate="G$1" pin="-"/>
+<wire x1="17.78" y1="80.01" x2="15.24" y2="80.01" width="0.1524" layer="91"/>
+<label x="17.78" y="80.01" size="1.778" layer="95" xref="yes"/>
+<pinref part="X1" gate="-2" pin="S"/>
+<wire x1="15.24" y1="80.01" x2="12.7" y2="80.01" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="80.01" x2="15.24" y2="74.93" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="74.93" x2="53.34" y2="74.93" width="0.1524" layer="91"/>
+<junction x="15.24" y="80.01"/>
+<pinref part="R46" gate="G$1" pin="1"/>
+<wire x1="53.34" y1="74.93" x2="58.42" y2="74.93" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="72.39" x2="53.34" y2="72.39" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="72.39" x2="53.34" y2="74.93" width="0.1524" layer="91"/>
+<junction x="53.34" y="74.93"/>
+</segment>
+</net>
+<net name="VDD" class="0">
+<segment>
+<pinref part="F1" gate="G$1" pin="2A"/>
+<pinref part="F1" gate="G$1" pin="2B"/>
+<wire x1="71.12" y1="85.09" x2="73.66" y2="85.09" width="0.1524" layer="91"/>
+<pinref part="VDD10" gate="G$1" pin="VDD"/>
+<wire x1="73.66" y1="85.09" x2="78.74" y2="85.09" width="0.1524" layer="91"/>
+<junction x="73.66" y="85.09"/>
+<pinref part="LED_SERVO1" gate="G$1" pin="A"/>
+<wire x1="78.74" y1="85.09" x2="78.74" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="85.09" x2="78.74" y2="82.55" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="+1" class="0">
+<segment>
+<pinref part="BATT_CM2" gate="G$1" pin="+"/>
+<pinref part="Q1" gate="G$1" pin="S"/>
+<wire x1="12.7" y1="85.09" x2="38.1" y2="85.09" width="0.1524" layer="91"/>
+<pinref part="R45" gate="G$1" pin="1"/>
+<wire x1="38.1" y1="85.09" x2="50.8" y2="85.09" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="77.47" x2="38.1" y2="77.47" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="77.47" x2="38.1" y2="85.09" width="0.1524" layer="91"/>
+<junction x="38.1" y="85.09"/>
+</segment>
+</net>
+<net name="N$27" class="0">
+<segment>
+<pinref part="R45" gate="G$1" pin="2"/>
+<pinref part="Q1" gate="G$1" pin="G"/>
+<wire x1="53.34" y1="77.47" x2="53.34" y2="80.01" width="0.1524" layer="91"/>
+<pinref part="X1" gate="-1" pin="S"/>
+<wire x1="58.42" y1="77.47" x2="53.34" y2="77.47" width="0.1524" layer="91"/>
+<junction x="53.34" y="77.47"/>
+</segment>
+</net>
+<net name="DRAIN1" class="0">
+<segment>
+<pinref part="Q1" gate="G$1" pin="D"/>
+<pinref part="F1" gate="G$1" pin="1A"/>
+<wire x1="60.96" y1="85.09" x2="63.5" y2="85.09" width="0.1524" layer="91"/>
+<pinref part="F1" gate="G$1" pin="1B"/>
+<wire x1="66.04" y1="85.09" x2="63.5" y2="85.09" width="0.1524" layer="91"/>
+<junction x="63.5" y="85.09"/>
+</segment>
+</net>
+<net name="N$28" class="0">
+<segment>
+<pinref part="R46" gate="G$1" pin="2"/>
+<pinref part="LED_SERVO1" gate="G$1" pin="C"/>
+<wire x1="76.2" y1="72.39" x2="78.74" y2="72.39" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="72.39" x2="78.74" y2="74.93" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

@@ -1,4 +1,4 @@
-#include <Dynamixel2Arduino.h>
+  #include <Dynamixel2Arduino.h>
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
@@ -9,14 +9,14 @@ uint16_t BNO055_SAMPLERATE_DELAY_MS = 0;
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
 
 // Dynamixel Arduino define pin for CM
-#define DXL_SERIAL               Serial2
-#define DEBUG_SERIAL             Serial
+#define DXL_SERIAL               Serial
+#define DEBUG_SERIAL             Serial2
 const uint8_t DXL_DIR_PIN =      5;
 const uint8_t DXL_ID      =      200; // ID Dynamixel
 
 // Pinout for Switch
-#define SW_Start                 34
-#define SW_Stop                  35
+#define SW_Start                 40
+#define SW_Stop                  44
 #define Dxl_power                32
 
 // Pinout for LED
@@ -25,7 +25,7 @@ const uint8_t DXL_ID      =      200; // ID Dynamixel
 #define LED_Blue_enable          14
 
 //State
-//bool dxl_power_is;
+#define Return_Delay             100
 volatile int start_button_state = 0;
 volatile int stop_button_state  = 0;
 
@@ -33,7 +33,7 @@ volatile int stop_button_state  = 0;
 DYNAMIXEL::SerialPortHandler dxl_port(DXL_SERIAL, DXL_DIR_PIN);
 const float DXL_PROTOCOL_VER_1_0 = 1.0;
 const float DXL_PROTOCOL_VER_2_0 = 2.0;
-const uint16_t DXL_MODEL_NUM     = 0x136; // OpenCM 9.04 model number
+const uint16_t DXL_MODEL_NUM     = 0x190; // OpenCM 9.04 model number
 DYNAMIXEL::Slave dxl(dxl_port, DXL_MODEL_NUM);
 
 
@@ -53,6 +53,7 @@ uint16_t GyroZ_addr       = 100;
 uint16_t LED_R_addr       = 104;
 uint16_t LED_G_addr       = 108;
 uint16_t LED_B_addr       = 112;
+uint16_t Random_var       = 200;
 
 // Stored variables for Interrupt
 uint8_t Switch_Button[2];
@@ -66,6 +67,7 @@ uint16_t gyro[3];
 // Store variable for LED
 uint8_t led[3];
 
+uint8_t Var = 0;
 //This namespace is required to use Control table item names
 using namespace ControlTableItem;
 
@@ -83,7 +85,7 @@ void setup() {
 
   dxl_port.begin(1000000);
   dxl.setPortProtocolVersion(DXL_PROTOCOL_VER_1_0);
-  dxl.setFirmwareVersion(25);
+  dxl.setFirmwareVersion(1);
   dxl.setID(DXL_ID);
 
   dxl.addControlItem(SW_Start_addr, Switch_Button[0]);
@@ -101,7 +103,6 @@ void setup() {
   dxl.addControlItem(LED_R_addr, led[0]);
   dxl.addControlItem(LED_G_addr, led[1]);
   dxl.addControlItem(LED_B_addr, led[2]);
-  //  dxl.addControlItem(LED_addr, Led_Esp)
 
   dxl.setReadCallbackFunc(read_callback_func);
   dxl.setWriteCallbackFunc(write_callback_func);
@@ -120,12 +121,14 @@ void loop() {
     DEBUG_SERIAL.print("Last status packet err code: ");
     DEBUG_SERIAL.println(dxl.getLastStatusPacketError());
     DEBUG_SERIAL.println();
+    
+//    delayMicroseconds(Return_Delay);
 
   }
 
   imu::Vector<3> Orientation = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
-  imu::Vector<3> Accel = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
-  imu::Vector<3> Gyro  = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
+  imu::Vector<3> Accel       = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
+  imu::Vector<3> Gyro        = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
 
   //  YPR value
   ypr[0]  = Orientation.x();
@@ -144,6 +147,8 @@ void loop() {
 
   uint8_t system, gyro, accel = 0;
   bno.Calibration_no_mag(&system, &gyro, &accel);
+
+//  delayMicroseconds(Return_Delay);
 }
 
 void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)

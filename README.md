@@ -10,5 +10,5 @@ Documentations for [Loadcel_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_
 
 Documentations for [Interface_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/Interface)
 
-![Alt text](/home/ichiro/ICHIRO/ichiro_dxl_board/image/ichiro_dxl_board.jpg "ICHIRO_DXL_BOARD")
+![Alt text](/image/ichiro_dxl_board.jpg "ICHIRO_DXL_BOARD")
 

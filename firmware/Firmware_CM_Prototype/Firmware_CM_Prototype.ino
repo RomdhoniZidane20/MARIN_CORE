@@ -1,12 +1,14 @@
-  #include <Dynamixel2Arduino.h>
+#include <Dynamixel2Arduino.h>
 #include <Wire.h>
+#include <MadgwickAHRS.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 
 //IMU variables
-uint16_t BNO055_SAMPLERATE_DELAY_MS = 0;
+uint16_t BNO055_SAMPLERATE_DELAY_MS = 10;
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
+Madgwick filter;
 
 // Dynamixel Arduino define pin for CM
 #define DXL_SERIAL               Serial
@@ -39,21 +41,21 @@ DYNAMIXEL::Slave dxl(dxl_port, DXL_MODEL_NUM);
 
 //Addresses for register variable
 uint16_t SW_Start_addr    = 56;
-uint16_t SW_Stop_addr     = 60;
-uint16_t dxl_enbale_addr  = 64;
-uint16_t Yaw_addr         = 68;
-uint16_t Pitch_addr       = 72;
-uint16_t Roll_addr        = 76;
-uint16_t AccelX_addr      = 80;
-uint16_t AccelY_addr      = 84;
-uint16_t AccelZ_addr      = 88;
-uint16_t GyroX_addr       = 92;
-uint16_t GyroY_addr       = 96;
-uint16_t GyroZ_addr       = 100;
-uint16_t LED_R_addr       = 104;
-uint16_t LED_G_addr       = 108;
-uint16_t LED_B_addr       = 112;
-uint16_t Random_var       = 200;
+uint16_t SW_Stop_addr     = 58;
+uint16_t dxl_enbale_addr  = 60;
+uint16_t Yaw_addr         = 62;
+uint16_t Pitch_addr       = 64;
+uint16_t Roll_addr        = 66;
+uint16_t AccelX_addr      = 68;
+uint16_t AccelY_addr      = 70;
+uint16_t AccelZ_addr      = 72;
+uint16_t GyroX_addr       = 74;
+uint16_t GyroY_addr       = 76;
+uint16_t GyroZ_addr       = 78;
+uint16_t LED_R_addr       = 80;
+uint16_t LED_G_addr       = 82;
+uint16_t LED_B_addr       = 84;
+//uint16_t Random_var       = 200;
 
 // Stored variables for Interrupt
 uint8_t Switch_Button[2];
@@ -77,7 +79,8 @@ void setup() {
   //  pinMode(ledPin, OUTPUT);
 
   DEBUG_SERIAL.begin(115200);
-  bno.begin();
+  bno.begin(bno.OPERATION_MODE_IMUPLUS);
+//  bno.setMode(bno.OPERATION_MODE_IMUPLUS);
 
   pinMode(SW_Start, INPUT);
   pinMode(SW_Stop, INPUT);
@@ -85,7 +88,7 @@ void setup() {
 
   dxl_port.begin(1000000);
   dxl.setPortProtocolVersion(DXL_PROTOCOL_VER_1_0);
-  dxl.setFirmwareVersion(1);
+  dxl.setFirmwareVersion(24);
   dxl.setID(DXL_ID);
 
   dxl.addControlItem(SW_Start_addr, Switch_Button[0]);
@@ -107,7 +110,7 @@ void setup() {
   dxl.setReadCallbackFunc(read_callback_func);
   dxl.setWriteCallbackFunc(write_callback_func);
 
-//  delay();
+  //  delay();
 
 }
 
@@ -121,8 +124,8 @@ void loop() {
     DEBUG_SERIAL.print("Last status packet err code: ");
     DEBUG_SERIAL.println(dxl.getLastStatusPacketError());
     DEBUG_SERIAL.println();
-    
-//    delayMicroseconds(Return_Delay);
+
+    //    delayMicroseconds(Return_Delay);
 
   }
 
@@ -132,8 +135,8 @@ void loop() {
 
   //  YPR value
   ypr[0]  = Orientation.x();
-  ypr[1]  = Orientation.y() + 90;
-  ypr[2]  = Orientation.z() + 180;
+  ypr[1]  = Orientation.y() + 360;
+  ypr[2]  = Orientation.z() + 360;
 
   //  Accelerometer Value
   accel[0]    = Accel.x();
@@ -145,10 +148,29 @@ void loop() {
   gyro[1]    = Gyro.y();
   gyro[2]    = Gyro.z();
 
+
+//  sensors_event_t event;
+//  bno.getEvent(&event);
+//
+//  Serial.print("X: ");
+//  Serial.print(event.orientation.x, 4);
+//  Serial.print("\tY: ");
+//  Serial.print(event.orientation.y, 4);
+//  Serial.print("\tZ: ");
+//  Serial.print(event.orientation.z, 4);
+//  Serial.println("");
+
+//  Serial.print("Ax: ");
+//  Serial.print(accel[0]);
+//  Serial.print("\tAy: ");
+//  Serial.print(accel[1]);
+//  Serial.print("\tAz: ");
+//  Serial.println(accel[2]);
+  
   uint8_t system, gyro, accel = 0;
   bno.Calibration_no_mag(&system, &gyro, &accel);
 
-//  delayMicroseconds(Return_Delay);
+  //  delayMicroseconds(Return_Delay);
 }
 
 void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
@@ -239,4 +261,22 @@ void write_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
   {
     digitalWrite(led[2], LED_Blue_enable);
   }
+}
+
+float convertRawAcceleration(int aRaw) {
+  // since we are using 2G range
+  // -2g maps to a raw value of -32768
+  // +2g maps to a raw value of 32767
+  
+  float a = (aRaw * 2.0) / 32768.0;
+  return a;
+}
+
+float convertRawGyro(int gRaw) {
+  // since we are using 250 degrees/seconds range
+  // -250 maps to a raw value of -32768
+  // +250 maps to a raw value of 32767
+  
+  float g = (gRaw * 250.0) / 32768.0;
+  return g;
 }

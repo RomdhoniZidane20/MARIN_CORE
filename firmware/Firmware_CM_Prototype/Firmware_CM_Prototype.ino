@@ -40,26 +40,26 @@ DYNAMIXEL::Slave dxl(dxl_port, DXL_MODEL_NUM);
 
 
 //Addresses for register variable
-uint16_t SW_Start_addr    = 56;
-uint16_t SW_Stop_addr     = 58;
-uint16_t dxl_enbale_addr  = 60;
-uint16_t Yaw_addr         = 62;
-uint16_t Pitch_addr       = 64;
-uint16_t Roll_addr        = 66;
-uint16_t AccelX_addr      = 68;
-uint16_t AccelY_addr      = 70;
-uint16_t AccelZ_addr      = 72;
-uint16_t GyroX_addr       = 74;
-uint16_t GyroY_addr       = 76;
-uint16_t GyroZ_addr       = 78;
-uint16_t LED_R_addr       = 80;
-uint16_t LED_G_addr       = 82;
-uint16_t LED_B_addr       = 84;
+uint16_t Yaw_addr         = 60;
+uint16_t Pitch_addr       = 62;
+uint16_t Roll_addr        = 64;
+uint16_t AccelX_addr      = 66;
+uint16_t SW_Start_addr    = 68;
+uint16_t SW_Stop_addr     = 70;
+uint16_t dxl_enbale_addr  = 72;
+//uint16_t AccelY_addr      = 74;
+//uint16_t AccelZ_addr      = 76;
+//uint16_t GyroX_addr       = 78;
+//uint16_t GyroY_addr       = 76;
+//uint16_t GyroZ_addr       = 78;
+uint16_t LED_R_addr       = 74;
+uint16_t LED_G_addr       = 76;
+uint16_t LED_B_addr       = 78;
 //uint16_t Random_var       = 200;
 
 // Stored variables for Interrupt
-uint8_t Switch_Button[2];
-uint8_t dxl_power_enable;
+uint16_t Switch_Button[2];
+uint16_t dxl_power_enable;
 
 // Stored variable for imu
 uint16_t ypr[3];
@@ -67,7 +67,7 @@ uint16_t accel[3];
 uint16_t gyro[3];
 
 // Store variable for LED
-uint8_t led[3];
+uint16_t led[3];
 
 uint8_t Var = 0;
 //This namespace is required to use Control table item names
@@ -97,12 +97,12 @@ void setup() {
   dxl.addControlItem(Yaw_addr, ypr[0]);
   dxl.addControlItem(Pitch_addr, ypr[1]);
   dxl.addControlItem(Roll_addr, ypr[2]);
-  dxl.addControlItem(AccelX_addr, accel[0]);
-  dxl.addControlItem(AccelY_addr, accel[1]);
-  dxl.addControlItem(AccelZ_addr, accel[2]);
-  dxl.addControlItem(GyroX_addr, gyro[0]);
-  dxl.addControlItem(GyroY_addr, gyro[1]);
-  dxl.addControlItem(GyroZ_addr, gyro[2]);
+//  dxl.addControlItem(AccelX_addr, accel[0]);
+//  dxl.addControlItem(AccelY_addr, accel[1]);
+//  dxl.addControlItem(AccelZ_addr, accel[2]);
+//  dxl.addControlItem(GyroX_addr, gyro[0]);
+//  dxl.addControlItem(GyroY_addr, gyro[1]);
+//  dxl.addControlItem(GyroZ_addr, gyro[2]);
   dxl.addControlItem(LED_R_addr, led[0]);
   dxl.addControlItem(LED_G_addr, led[1]);
   dxl.addControlItem(LED_B_addr, led[2]);
@@ -148,24 +148,6 @@ void loop() {
   gyro[1]    = Gyro.y();
   gyro[2]    = Gyro.z();
 
-
-//  sensors_event_t event;
-//  bno.getEvent(&event);
-//
-//  Serial.print("X: ");
-//  Serial.print(event.orientation.x, 4);
-//  Serial.print("\tY: ");
-//  Serial.print(event.orientation.y, 4);
-//  Serial.print("\tZ: ");
-//  Serial.print(event.orientation.z, 4);
-//  Serial.println("");
-
-//  Serial.print("Ax: ");
-//  Serial.print(accel[0]);
-//  Serial.print("\tAy: ");
-//  Serial.print(accel[1]);
-//  Serial.print("\tAz: ");
-//  Serial.println(accel[2]);
   
   uint8_t system, gyro, accel = 0;
   bno.Calibration_no_mag(&system, &gyro, &accel);
@@ -204,35 +186,35 @@ void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
     ypr[2];
   }
 
-  if (item_addr == AccelX_addr)
-  {
-    accel[0];
-  }
-
-  if (item_addr == AccelY_addr)
-  {
-    accel[1];
-  }
-
-  if (item_addr == AccelZ_addr)
-  {
-    accel[2];
-  }
-
-  if (item_addr == GyroX_addr)
-  {
-    gyro[0];
-  }
-
-  if (item_addr == GyroY_addr)
-  {
-    gyro[1];
-  }
-
-  if (item_addr == GyroZ_addr)
-  {
-    gyro[2];
-  }
+//  if (item_addr == AccelX_addr)
+//  {
+//    accel[0];
+//  }
+//
+//  if (item_addr == AccelY_addr)
+//  {
+//    accel[1];
+//  }
+//
+//  if (item_addr == AccelZ_addr)
+//  {
+//    accel[2];
+//  }
+//
+//  if (item_addr == GyroX_addr)
+//  {
+//    gyro[0];
+//  }
+//
+//  if (item_addr == GyroY_addr)
+//  {
+//    gyro[1];
+//  }
+//
+//  if (item_addr == GyroZ_addr)
+//  {
+//    gyro[2];
+//  }
 
 }
 
@@ -261,22 +243,4 @@ void write_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
   {
     digitalWrite(led[2], LED_Blue_enable);
   }
-}
-
-float convertRawAcceleration(int aRaw) {
-  // since we are using 2G range
-  // -2g maps to a raw value of -32768
-  // +2g maps to a raw value of 32767
-  
-  float a = (aRaw * 2.0) / 32768.0;
-  return a;
-}
-
-float convertRawGyro(int gRaw) {
-  // since we are using 250 degrees/seconds range
-  // -250 maps to a raw value of -32768
-  // +250 maps to a raw value of 32767
-  
-  float g = (gRaw * 250.0) / 32768.0;
-  return g;
 }

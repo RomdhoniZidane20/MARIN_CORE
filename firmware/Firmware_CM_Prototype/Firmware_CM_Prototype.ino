@@ -39,27 +39,29 @@ const uint16_t DXL_MODEL_NUM     = 0x190; // OpenCM 9.04 model number
 DYNAMIXEL::Slave dxl(dxl_port, DXL_MODEL_NUM);
 
 
-//Addresses for register variable
+// Addresses for read register variable
 uint16_t Yaw_addr         = 60;
 uint16_t Pitch_addr       = 62;
 uint16_t Roll_addr        = 64;
 uint16_t AccelX_addr      = 66;
 uint16_t SW_Start_addr    = 68;
-uint16_t SW_Stop_addr     = 70;
-uint16_t dxl_enbale_addr  = 72;
+uint16_t SW_Stop_addr     = 69;
+
+// Address for wirte register variable
+uint8_t dxl_enbale_addr   = 70;
+uint8_t LED_R_addr        = 71;
+uint8_t LED_G_addr        = 72;
+uint8_t LED_B_addr        = 73;
+
 //uint16_t AccelY_addr      = 74;
 //uint16_t AccelZ_addr      = 76;
 //uint16_t GyroX_addr       = 78;
 //uint16_t GyroY_addr       = 76;
 //uint16_t GyroZ_addr       = 78;
-uint16_t LED_R_addr       = 74;
-uint16_t LED_G_addr       = 76;
-uint16_t LED_B_addr       = 78;
-//uint16_t Random_var       = 200;
 
 // Stored variables for Interrupt
-uint16_t Switch_Button[2];
-uint16_t dxl_power_enable;
+uint8_t Switch_Button[2];
+uint8_t dxl_power_enable;
 
 // Stored variable for imu
 uint16_t ypr[3];
@@ -67,9 +69,8 @@ uint16_t accel[3];
 uint16_t gyro[3];
 
 // Store variable for LED
-uint16_t led[3];
+uint8_t led[3];
 
-uint8_t Var = 0;
 //This namespace is required to use Control table item names
 using namespace ControlTableItem;
 
@@ -97,15 +98,17 @@ void setup() {
   dxl.addControlItem(Yaw_addr, ypr[0]);
   dxl.addControlItem(Pitch_addr, ypr[1]);
   dxl.addControlItem(Roll_addr, ypr[2]);
+  dxl.addControlItem(LED_R_addr, led[0]);
+  dxl.addControlItem(LED_G_addr, led[1]);
+  dxl.addControlItem(LED_B_addr, led[2]);
+  
 //  dxl.addControlItem(AccelX_addr, accel[0]);
 //  dxl.addControlItem(AccelY_addr, accel[1]);
 //  dxl.addControlItem(AccelZ_addr, accel[2]);
 //  dxl.addControlItem(GyroX_addr, gyro[0]);
 //  dxl.addControlItem(GyroY_addr, gyro[1]);
 //  dxl.addControlItem(GyroZ_addr, gyro[2]);
-  dxl.addControlItem(LED_R_addr, led[0]);
-  dxl.addControlItem(LED_G_addr, led[1]);
-  dxl.addControlItem(LED_B_addr, led[2]);
+  
 
   dxl.setReadCallbackFunc(read_callback_func);
   dxl.setWriteCallbackFunc(write_callback_func);

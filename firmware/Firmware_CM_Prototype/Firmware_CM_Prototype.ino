@@ -40,12 +40,12 @@ DYNAMIXEL::Slave dxl(dxl_port, DXL_MODEL_NUM);
 
 
 // Addresses for read register variable
-uint16_t Yaw_addr         = 60;
-uint16_t Pitch_addr       = 62;
-uint16_t Roll_addr        = 64;
-uint16_t Random_num_addr  = 66;
-uint16_t SW_Start_addr    = 68;
-uint16_t SW_Stop_addr     = 70;
+uint16_t SW_Start_addr    = 60;
+uint16_t SW_Stop_addr     = 62;
+uint16_t Yaw_addr         = 64;
+uint16_t Pitch_addr       = 66;
+uint16_t Roll_addr        = 68;
+uint16_t Random_num_addr  = 70;
 
 // Address for wirte register variable
 uint16_t dxl_enbale_addr  = 72;

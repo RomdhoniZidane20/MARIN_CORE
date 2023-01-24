@@ -13,3 +13,6 @@
     2. Jika bulkread address khusus read harus urut
     3. BELUM SUPPORT SYNCWRITE
 
+## 25 Januari 2023
+    1. Bulkread hanya bisa dibaca pada satu variabel array yang sama.
+    2. Test untuk maksimal len address hingga 8 bit untuk paket Instruksi Bulkread.

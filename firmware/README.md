@@ -15,4 +15,6 @@
 
 ## 25 Januari 2023
     1. Bulkread hanya bisa dibaca pada satu variabel array yang sama.
-    2. Test untuk maksimal len address hingga 8 bit untuk paket Instruksi Bulkread.
+    2. Agar dapat dibaca Bulkread, pengiriman data paket dari firmware harus melalui satu array untuk pembacaan datanya.
+    3. Sudah dapat membaca lebih dari 12 len address. 
+    4. TODO syncwrite !!

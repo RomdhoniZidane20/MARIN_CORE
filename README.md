@@ -1,4 +1,4 @@
-# ichiro_dxl_board
+# MARIN Core
 ICHIRO Controller Manager Board for Dynamixel
 ## Features
 

@@ -13,7 +13,7 @@ ICHIRO Controller Manager Board for Dynamixel
 
 Documentations for [FT4232_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/FT4232)
 
-Documentations for [ESP32_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/Firmware_CM_Prototype)
+Documentations for [MARIN_CORE](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/Marin_Core_Firmware)
 
 Documentations for [Loadcel_dxl](https://github.com/RomdhoniZidane20/ichiro_dxl_board/tree/main/firmware/Loadcell)
 

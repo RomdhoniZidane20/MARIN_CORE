@@ -1,6 +1,5 @@
 # ichiro_dxl_board
 ICHIRO Controller Manager Board for Dynamixel
-
 ## Features
 
 * RS485/TTL on 4 Buses

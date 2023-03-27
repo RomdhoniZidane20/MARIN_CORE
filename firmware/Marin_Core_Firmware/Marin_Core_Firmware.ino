@@ -1,14 +1,17 @@
 #include <Dynamixel2Arduino.h>
 #include <Wire.h>
-#include <MadgwickAHRS.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 
+TaskHandle_t task_dxl, task_input;
+
+void Task_DXL( void *pvParameters );
+void Task_INPUT( void *pvParameters );
+
 //IMU variables
 uint16_t BNO055_SAMPLERATE_DELAY_MS = 0;
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
-Madgwick filter;
 
 // Dynamixel Arduino define pin for CM
 #define DXL_SERIAL               Serial2
@@ -65,37 +68,52 @@ uint8_t dxl_power_enable;
 
 // Stored variable for imu
 uint16_t dxl_data[20];
-//float dxl_data_f[12];
 uint16_t accel[3];
 uint16_t gyro[3];
 
-// Store variable for LED
-//uint8_t led[3];
-
-// Store Variables for random num
 
 //This namespace is required to use Control table item names
 using namespace ControlTableItem;
 
 
-void setup() {
-
-  //  pinMode(ledPin, OUTPUT);
-
+void setup()
+{
   DEBUG_SERIAL.begin(115200);
-  bno.begin(bno.OPERATION_MODE_IMUPLUS);
+  disableCore0WDT();
+  disableCore1WDT();
 
-  pinMode(SW_Start, INPUT);
-  pinMode(SW_Stop, INPUT);
-  pinMode(Dxl_power, OUTPUT);
-  pinMode(LED_Red_enable, OUTPUT);
-  pinMode(LED_Green_enable, OUTPUT);
-  pinMode(LED_Blue_enable, OUTPUT);
+  xTaskCreatePinnedToCore(
+    Task_DXL
+    ,  "Task_DXL"   // task name
+    ,  65536        // stack size allocations
+    ,  NULL
+    ,  1   
+    ,  &task_dxl
+    ,  0);
 
+  xTaskCreatePinnedToCore(
+    Task_INPUT
+    ,  "Task_INPUT"   // task namepretender harucha
+    ,  65536          // stack size allocations
+    ,  NULL
+    ,  3  // Priority 3 since otherwise
+    ,  &task_input
+    ,  1);
+
+}
+
+void loop()
+{
+  // skip this state
+}
+
+void Task_DXL( void *pvParameters )
+{
+  (void) pvParameters;
 
   dxl_port.begin(1000000);
   dxl.setPortProtocolVersion(DXL_PROTOCOL_VER_1_0);
-  dxl.setFirmwareVersion(24);
+  dxl.setFirmwareVersion(41);
   dxl.setID(DXL_ID);
 
   dxl.addControlItem(Yaw_addr,        dxl_data[0]);
@@ -115,67 +133,24 @@ void setup() {
   dxl.addControlItem(LED_G_addr,      dxl_data[14]);
   dxl.addControlItem(LED_B_addr,      dxl_data[15]);
 
-
-
   dxl.setReadCallbackFunc(read_callback_func);
   dxl.setWriteCallbackFunc(write_callback_func);
 
-  //    delay();
+  for (;;)
+  {
+    if (dxl.processPacket() == false) {
 
-}
+      DEBUG_SERIAL.print("Last lib err code: ");
+      DEBUG_SERIAL.print(dxl.getLastLibErrCode());
+      DEBUG_SERIAL.print(", ");
+      DEBUG_SERIAL.print("Last status packet err code: ");
+      DEBUG_SERIAL.println(dxl.getLastStatusPacketError());
+      DEBUG_SERIAL.println();
 
-void loop() {
-
-  if (dxl.processPacket() == false) {
-
-    DEBUG_SERIAL.print("Last lib err code: ");
-    DEBUG_SERIAL.print(dxl.getLastLibErrCode());
-    DEBUG_SERIAL.print(", ");
-    DEBUG_SERIAL.print("Last status packet err code: ");
-    DEBUG_SERIAL.println(dxl.getLastStatusPacketError());
-    DEBUG_SERIAL.println();
+    }
 
   }
 
-  imu::Vector<3> Orientation = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
-  imu::Vector<3> Accel       = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
-  imu::Vector<3> Gyro        = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
-
-  //  YPR value
-  dxl_data[0]  = Orientation.x();
-  dxl_data[1]  = Orientation.y() + 360;
-  dxl_data[2]  = Orientation.z() + 360;
-
-  dxl_data[3] = digitalRead(SW_Start);
-  dxl_data[4] = digitalRead(SW_Stop);
-
-  //  Accelerometer Value
-  dxl_data[5]    = Accel.x() + 100;
-  dxl_data[6]    = Accel.y() + 100;
-  dxl_data[7]    = Accel.z() + 100;
-
-  //  Gyro Value
-  dxl_data[8]    = Gyro.x() + 1000;
-  dxl_data[9]    = Gyro.y() + 1000;
-  dxl_data[10]   = Gyro.z() + 1000;
-
-  
-
-
-  //  DEBUG_SERIAL.print("Accel X: ");
-  //  DEBUG_SERIAL.print(dxl_data_f[0]);
-  //    Serial.print("Accel Y: ");
-  //    Serial.print("Accel Z: ");
-
-  //  random_num = random(200);
-
-  //  Debug
-
-  //  Serial.println(random(200));
-
-
-  uint8_t system, gyro, accel = 0;
-  bno.Calibration_no_mag(&system, &gyro, &accel);
 }
 
 void read_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
@@ -272,4 +247,48 @@ void write_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
   {
     digitalWrite(LED_Blue_enable, dxl_data[15]);
   }
+}
+
+
+void Task_INPUT( void *pvParameters )
+{
+  (void) pvParameters;
+
+  bno.begin(bno.OPERATION_MODE_IMUPLUS);
+
+  pinMode(SW_Start, INPUT);
+  pinMode(SW_Stop, INPUT);
+  pinMode(Dxl_power, OUTPUT);
+  pinMode(LED_Red_enable, OUTPUT);
+  pinMode(LED_Green_enable, OUTPUT);
+  pinMode(LED_Blue_enable, OUTPUT);
+
+  for (;;)
+  {
+    imu::Vector<3> Orientation = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
+    imu::Vector<3> Accel       = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
+    imu::Vector<3> Gyro        = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
+
+    //  YPR value
+    dxl_data[0]  = Orientation.x();
+    dxl_data[1]  = Orientation.y() + 360;
+    dxl_data[2]  = Orientation.z() + 360;
+
+    dxl_data[3] = digitalRead(SW_Start);
+    dxl_data[4] = digitalRead(SW_Stop);
+
+    //  Accelerometer Value
+    dxl_data[5]    = Accel.x() + 100;
+    dxl_data[6]    = Accel.y() + 100;
+    dxl_data[7]    = Accel.z() + 100;
+
+    //  Gyro Value
+    dxl_data[8]    = Gyro.x() + 1000;
+    dxl_data[9]    = Gyro.y() + 1000;
+    dxl_data[10]   = Gyro.z() + 1000;
+
+    uint8_t system, gyro, accel = 0;
+    bno.Calibration_no_mag(&system, &gyro, &accel);
+  }
+
 }

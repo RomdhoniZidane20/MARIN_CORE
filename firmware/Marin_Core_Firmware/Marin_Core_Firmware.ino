@@ -17,7 +17,7 @@ Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
 #define DXL_SERIAL               Serial2
 #define DEBUG_SERIAL             Serial
 const uint8_t DXL_DIR_PIN =      5;
-const uint8_t DXL_ID      =      190; // ID Dynamixel
+const uint8_t DXL_ID      =      200; // ID Dynamixel
 
 // Pinout for Switch
 #define SW_Start                 34
@@ -68,8 +68,10 @@ uint8_t dxl_power_enable;
 
 // Stored variable for imu
 uint16_t dxl_data[20];
-uint16_t accel[3];
-uint16_t gyro[3];
+int16_t accel_raw[3];
+int16_t gyro_raw[3];
+
+int32_t temp;
 
 
 //This namespace is required to use Control table item names
@@ -87,16 +89,16 @@ void setup()
     ,  "Task_DXL"   // task name
     ,  65536        // stack size allocations
     ,  NULL
-    ,  1   
+    ,  3
     ,  &task_dxl
     ,  0);
 
   xTaskCreatePinnedToCore(
     Task_INPUT
-    ,  "Task_INPUT"   // task namepretender harucha
+    ,  "Task_INPUT"   // task namep
     ,  65536          // stack size allocations
     ,  NULL
-    ,  3  // Priority 3 since otherwise
+    ,  3
     ,  &task_input
     ,  1);
 
@@ -133,7 +135,7 @@ void Task_DXL( void *pvParameters )
   dxl.addControlItem(LED_G_addr,      dxl_data[14]);
   dxl.addControlItem(LED_B_addr,      dxl_data[15]);
 
-  dxl.setReadCallbackFunc(read_callback_func);
+  //  dxl.setReadCallbackFunc(read_callback_func);
   dxl.setWriteCallbackFunc(write_callback_func);
 
   for (;;)
@@ -148,6 +150,8 @@ void Task_DXL( void *pvParameters )
       DEBUG_SERIAL.println();
 
     }
+//    delayMicroseconds(20);
+//      delay(500);
 
   }
 
@@ -253,6 +257,7 @@ void write_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
 void Task_INPUT( void *pvParameters )
 {
   (void) pvParameters;
+//  Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
 
   bno.begin(bno.OPERATION_MODE_IMUPLUS);
 
@@ -266,27 +271,71 @@ void Task_INPUT( void *pvParameters )
   for (;;)
   {
     imu::Vector<3> Orientation = bno.getVector(Adafruit_BNO055::VECTOR_EULER);
-    imu::Vector<3> Accel       = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
+    imu::Vector<3> Accel       = bno.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
     imu::Vector<3> Gyro        = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
 
     //  YPR value
-    dxl_data[0]  = Orientation.x();
-    dxl_data[1]  = Orientation.y() + 360;
-    dxl_data[2]  = Orientation.z() + 360;
+    dxl_data[0]  = Orientation.x() + 1000;
+    dxl_data[1]  = Orientation.z() + 1000;
+    dxl_data[2]  = Orientation.y() + 1000;
 
+    // Push Button Start & Stop
     dxl_data[3] = digitalRead(SW_Start);
     dxl_data[4] = digitalRead(SW_Stop);
+    
 
     //  Accelerometer Value
-    dxl_data[5]    = Accel.x() + 100;
-    dxl_data[6]    = Accel.y() + 100;
-    dxl_data[7]    = Accel.z() + 100;
+    accel_raw[0] = Accel.y();
+    accel_raw[1] = Accel.x();
+    accel_raw[2] = Accel.z();
 
+    temp = (accel_raw[0]);
+    temp = temp * 5/4;
+    temp = 512 + temp;
+    if (temp > 1023) temp = 1023;
+    if(temp < 0) temp = 0;
+    dxl_data[5] = temp;
+
+    temp = (accel_raw[1]);
+    temp = temp * 5/4;
+    temp = 512 + temp;
+    if (temp > 1023) temp = 1023;
+    if(temp < 0) temp = 0;
+    dxl_data[6] = temp;
+
+    temp = (accel_raw[2]);
+    temp = temp * 5/4;
+    temp = 512 + temp;
+    if (temp > 1023) temp = 1023;
+    if(temp < 0) temp = 0;
+    dxl_data[7] = temp;
+
+
+    
     //  Gyro Value
-    dxl_data[8]    = Gyro.x() + 1000;
-    dxl_data[9]    = Gyro.y() + 1000;
-    dxl_data[10]   = Gyro.z() + 1000;
+    gyro_raw[0] = Gyro.y();
+    gyro_raw[1] = Gyro.x();
+    gyro_raw[2] = Gyro.z();
 
+    temp = (gyro_raw[0]);
+    temp = 512 + temp;
+    if (temp > 1023) temp = 1023;
+    if (temp < 0) temp = 0;
+    dxl_data[8] = temp;
+
+    temp = (gyro_raw[1]);
+    temp = 512 + temp;
+    if (temp > 1023) temp = 1023;
+    if (temp < 0) temp = 0;
+    dxl_data[9] = temp;
+
+    temp = (gyro_raw[2]);
+    temp = 512 + temp;
+    if (temp > 1023) temp = 1023;
+    if (temp < 0) temp = 0;
+    dxl_data[10] = temp;
+  
+    
     uint8_t system, gyro, accel = 0;
     bno.Calibration_no_mag(&system, &gyro, &accel);
   }

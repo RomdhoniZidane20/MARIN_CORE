@@ -135,7 +135,7 @@ void Task_DXL( void *pvParameters )
   dxl.addControlItem(LED_G_addr,      dxl_data[14]);
   dxl.addControlItem(LED_B_addr,      dxl_data[15]);
 
-  //  dxl.setReadCallbackFunc(read_callback_func);
+  dxl.setReadCallbackFunc(read_callback_func);
   dxl.setWriteCallbackFunc(write_callback_func);
 
   for (;;)

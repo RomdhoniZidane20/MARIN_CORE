@@ -1,5 +1,5 @@
 # License 
-The library of this repository based on 
+The FT4232 and ADM3078E eagle library of this repository based on  
 "SUSTAINA-OP" by [Masato Kubotera](https://github.com/MasatoKubotera) is licensed under [ CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 

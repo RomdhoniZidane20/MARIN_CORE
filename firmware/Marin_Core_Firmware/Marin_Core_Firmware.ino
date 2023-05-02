@@ -20,8 +20,8 @@ const uint8_t DXL_DIR_PIN =      5;
 const uint8_t DXL_ID      =      200; // ID Dynamixel
 
 // Pinout for Switch
-#define SW_Start                 34
-#define SW_Stop                  35
+#define SW_Start                 35
+#define SW_Stop                  34
 #define Dxl_power                32
 
 // Pinout for LED

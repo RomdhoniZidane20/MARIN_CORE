@@ -11,7 +11,7 @@ void Task_INPUT( void *pvParameters );
 
 //IMU variables
 uint16_t BNO055_SAMPLERATE_DELAY_MS = 0;
-Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
+
 
 // Dynamixel Arduino define pin for CM
 #define DXL_SERIAL               Serial2
@@ -42,17 +42,17 @@ const uint16_t DXL_MODEL_NUM     = 0x190; // OpenCM 9.04 model number
 DYNAMIXEL::Slave dxl(dxl_port, DXL_MODEL_NUM);
 
 // Addresses for read register variable
-uint16_t Yaw_addr         = 66;
-uint16_t Pitch_addr       = 68;
-uint16_t Roll_addr        = 70;
-uint16_t SW_Start_addr    = 72;
-uint16_t SW_Stop_addr     = 74;
-uint16_t AccelX_addr      = 76;
-uint16_t AccelY_addr      = 78;
-uint16_t AccelZ_addr      = 80;
-uint16_t GyroX_addr       = 82;
-uint16_t GyroY_addr       = 84;
-uint16_t GyroZ_addr       = 86;
+uint8_t Yaw_addr         = 66;
+uint8_t Pitch_addr       = 68;
+uint8_t Roll_addr        = 70;
+uint8_t SW_Start_addr    = 72;
+uint8_t SW_Stop_addr     = 74;
+uint8_t AccelX_addr      = 76;
+uint8_t AccelY_addr      = 78;
+uint8_t AccelZ_addr      = 80;
+uint8_t GyroX_addr       = 82;
+uint8_t GyroY_addr       = 84;
+uint8_t GyroZ_addr       = 86;
 
 // Address for wirte register variable
 uint8_t Reset_addr        = 88;
@@ -68,9 +68,8 @@ uint8_t dxl_power_enable;
 
 // Stored variable for imu
 uint16_t dxl_data[20];
-int16_t accel_raw[3];
-int16_t gyro_raw[3];
-
+int32_t accel_raw[3];
+int32_t gyro_raw[3];
 int32_t temp;
 
 
@@ -95,7 +94,7 @@ void setup()
 
   xTaskCreatePinnedToCore(
     Task_INPUT
-    ,  "Task_INPUT"   // task namep
+    ,  "Task_INPUT"   // task name
     ,  65536          // stack size allocations
     ,  NULL
     ,  3
@@ -150,8 +149,6 @@ void Task_DXL( void *pvParameters )
       DEBUG_SERIAL.println();
 
     }
-//    delayMicroseconds(20);
-//      delay(500);
 
   }
 
@@ -257,7 +254,7 @@ void write_callback_func(uint16_t item_addr, uint8_t &dxl_err_code, void* arg)
 void Task_INPUT( void *pvParameters )
 {
   (void) pvParameters;
-//  Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
+  Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
 
   bno.begin(bno.OPERATION_MODE_IMUPLUS);
 
@@ -290,51 +287,51 @@ void Task_INPUT( void *pvParameters )
     accel_raw[2] = Accel.z();
 
     temp = (accel_raw[0]);
-    temp = temp * 5/4;
+    temp = temp * 5/2;
     temp = 512 + temp;
     if (temp > 1023) temp = 1023;
     if(temp < 0) temp = 0;
     dxl_data[5] = temp;
 
     temp = (accel_raw[1]);
-    temp = temp * 5/4;
+    temp = temp * 5/2;
     temp = 512 + temp;
     if (temp > 1023) temp = 1023;
     if(temp < 0) temp = 0;
     dxl_data[6] = temp;
 
     temp = (accel_raw[2]);
-    temp = temp * 5/4;
+    temp = temp * 5/2;
     temp = 512 + temp;
     if (temp > 1023) temp = 1023;
     if(temp < 0) temp = 0;
     dxl_data[7] = temp;
 
-
-    
     //  Gyro Value
     gyro_raw[0] = Gyro.y();
     gyro_raw[1] = Gyro.x();
     gyro_raw[2] = Gyro.z();
 
     temp = (gyro_raw[0]);
+    temp = temp * (-1);
     temp = 512 + temp;
     if (temp > 1023) temp = 1023;
     if (temp < 0) temp = 0;
     dxl_data[8] = temp;
 
     temp = (gyro_raw[1]);
+    temp = temp * (-1);
     temp = 512 + temp;
     if (temp > 1023) temp = 1023;
     if (temp < 0) temp = 0;
     dxl_data[9] = temp;
 
     temp = (gyro_raw[2]);
+    temp = temp ;
     temp = 512 + temp;
     if (temp > 1023) temp = 1023;
     if (temp < 0) temp = 0;
-    dxl_data[10] = temp;
-  
+    dxl_data[10] = temp;  
     
     uint8_t system, gyro, accel = 0;
     bno.Calibration_no_mag(&system, &gyro, &accel);

@@ -198,7 +198,7 @@
 <text x="53.594" y="8.89" size="1.778" layer="21" ratio="14" rot="R270">BUS 4</text>
 <dimension x1="0" y1="60" x2="0" y2="0" x3="-2" y3="30" textsize="1.778" layer="37"/>
 <text x="25.146" y="38.608" size="1.778" layer="26" rot="MR180">Dynamixel Motor Controller
-   Designed by Andreas</text>
+   Designed by Andreas and Zidane</text>
 <text x="2.302" y="13.24" size="1.778" layer="25" rot="R90">Dynamixel Controller</text>
 <text x="114.3" y="2.794" size="1.778" layer="25" rot="R180">Powerswitch</text>
 <dimension x1="120" y1="0" x2="120" y2="60" x3="126.5" y3="30" textsize="1.778" layer="21" dtype="horizontal"/>
@@ -1619,8 +1619,8 @@ MELF 0.10 W</description>
 <description>&lt;b&gt;Molex Connectors&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
-<package name="22-23-2021">
-<description>.100" (2.54mm) Center Headers - 2 Pin</description>
+<package name="22-23-2021" urn="urn:adsk.eagle:footprint:8078259/1">
+<description>&lt;b&gt;KK® 254 Solid Header, Vertical, with Friction Lock, 2 Circuits, Tin (Sn) Plating&lt;/b&gt;&lt;p&gt;&lt;a href =http://www.molex.com/pdm_docs/sd/022232021_sd.pdf&gt;Datasheet &lt;/a&gt;</description>
 <wire x1="-2.54" y1="3.175" x2="2.54" y2="3.175" width="0.254" layer="21"/>
 <wire x1="2.54" y1="3.175" x2="2.54" y2="1.27" width="0.254" layer="21"/>
 <wire x1="2.54" y1="1.27" x2="2.54" y2="-3.175" width="0.254" layer="21"/>
@@ -1630,11 +1630,11 @@ MELF 0.10 W</description>
 <wire x1="-2.54" y1="1.27" x2="2.54" y2="1.27" width="0.254" layer="21"/>
 <pad name="1" x="-1.27" y="0" drill="1" shape="long" rot="R90"/>
 <pad name="2" x="1.27" y="0" drill="1" shape="long" rot="R90"/>
-<text x="-2.54" y="3.81" size="1.016" layer="25" ratio="14">&gt;NAME</text>
-<text x="-2.54" y="-5.08" size="1.016" layer="27" ratio="14">&gt;VALUE</text>
+<text x="-2.54" y="3.81" size="1.016" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-5.08" size="1.016" layer="27" ratio="10">&gt;VALUE</text>
 </package>
-<package name="22-23-2041">
-<description>.100" (2.54mm) Center Header - 4 Pin</description>
+<package name="22-23-2041" urn="urn:adsk.eagle:footprint:8078261/1">
+<description>&lt;b&gt;KK® 254 Solid Header, Vertical, with Friction Lock, 4 Circuits, Tin (Sn) Plating&lt;/b&gt;&lt;p&gt;&lt;a href =http://www.molex.com/pdm_docs/sd/022232041_sd.pdf&gt;Datasheet &lt;/a&gt;</description>
 <wire x1="-5.08" y1="3.175" x2="5.08" y2="3.175" width="0.254" layer="21"/>
 <wire x1="5.08" y1="3.175" x2="5.08" y2="1.27" width="0.254" layer="21"/>
 <wire x1="5.08" y1="1.27" x2="5.08" y2="-3.175" width="0.254" layer="21"/>
@@ -1646,11 +1646,11 @@ MELF 0.10 W</description>
 <pad name="2" x="-1.27" y="0" drill="1" shape="long" rot="R90"/>
 <pad name="3" x="1.27" y="0" drill="1" shape="long" rot="R90"/>
 <pad name="4" x="3.81" y="0" drill="1" shape="long" rot="R90"/>
-<text x="-5.08" y="3.81" size="1.016" layer="25" ratio="14">&gt;NAME</text>
-<text x="-5.08" y="-5.08" size="1.016" layer="27" ratio="14">&gt;VALUE</text>
+<text x="-5.08" y="3.81" size="1.016" layer="25" ratio="10">&gt;NAME</text>
+<text x="-5.08" y="-5.08" size="1.016" layer="27" ratio="10">&gt;VALUE</text>
 </package>
-<package name="22-23-2071">
-<description>.100" (2.54mm) Center Header - 7 Pin</description>
+<package name="22-23-2071" urn="urn:adsk.eagle:footprint:8078264/1">
+<description>&lt;b&gt;KK® 254 Solid Header, Vertical, with Friction Lock, 7 Circuits, Tin (Sn) Plating&lt;/b&gt;&lt;p&gt;&lt;a href =http://www.molex.com/pdm_docs/sd/022232071_sd.pdf&gt;Datasheet &lt;/a&gt;</description>
 <wire x1="-8.89" y1="3.175" x2="8.89" y2="3.175" width="0.254" layer="21"/>
 <wire x1="8.89" y1="3.175" x2="8.89" y2="1.27" width="0.254" layer="21"/>
 <wire x1="8.89" y1="1.27" x2="8.89" y2="-3.175" width="0.254" layer="21"/>
@@ -1665,24 +1665,48 @@ MELF 0.10 W</description>
 <pad name="5" x="2.54" y="0" drill="1" shape="long" rot="R90"/>
 <pad name="6" x="5.08" y="0" drill="1" shape="long" rot="R90"/>
 <pad name="7" x="7.62" y="0" drill="1" shape="long" rot="R90"/>
-<text x="-8.89" y="3.81" size="1.016" layer="25" ratio="14">&gt;NAME</text>
-<text x="-8.89" y="-5.08" size="1.016" layer="27" ratio="14">&gt;VALUE</text>
+<text x="-8.89" y="3.81" size="1.016" layer="25" ratio="10">&gt;NAME</text>
+<text x="-8.89" y="-5.08" size="1.016" layer="27" ratio="10">&gt;VALUE</text>
 </package>
 </packages>
+<packages3d>
+<package3d name="22-23-2021" urn="urn:adsk.eagle:package:8078633/1" type="box">
+<description>&lt;b&gt;KK® 254 Solid Header, Vertical, with Friction Lock, 2 Circuits, Tin (Sn) Plating&lt;/b&gt;&lt;p&gt;&lt;a href =http://www.molex.com/pdm_docs/sd/022232021_sd.pdf&gt;Datasheet &lt;/a&gt;</description>
+<packageinstances>
+<packageinstance name="22-23-2021"/>
+</packageinstances>
+</package3d>
+<package3d name="22-23-2041" urn="urn:adsk.eagle:package:8078635/1" type="box">
+<description>&lt;b&gt;KK® 254 Solid Header, Vertical, with Friction Lock, 4 Circuits, Tin (Sn) Plating&lt;/b&gt;&lt;p&gt;&lt;a href =http://www.molex.com/pdm_docs/sd/022232041_sd.pdf&gt;Datasheet &lt;/a&gt;</description>
+<packageinstances>
+<packageinstance name="22-23-2041"/>
+</packageinstances>
+</package3d>
+<package3d name="22-23-2071" urn="urn:adsk.eagle:package:8078638/1" type="box">
+<description>&lt;b&gt;KK® 254 Solid Header, Vertical, with Friction Lock, 7 Circuits, Tin (Sn) Plating&lt;/b&gt;&lt;p&gt;&lt;a href =http://www.molex.com/pdm_docs/sd/022232071_sd.pdf&gt;Datasheet &lt;/a&gt;</description>
+<packageinstances>
+<packageinstance name="22-23-2071"/>
+</packageinstances>
+</package3d>
+</packages3d>
 </library>
 <library name="led">
 <description>&lt;b&gt;LEDs&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;&lt;br&gt;
 Extended by Federico Battaglin &lt;author&gt;&amp;lt;federico.rd@fdpinternational.com&amp;gt;&lt;/author&gt; with DUOLED</description>
 <packages>
-<package name="CHIPLED_0805">
+<package name="CHIPLED_0805" urn="urn:adsk.eagle:footprint:15674/1">
 <description>&lt;b&gt;CHIPLED&lt;/b&gt;&lt;p&gt;
 Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
-<circle x="-0.45" y="0.85" radius="0.103" width="0.1016" layer="51"/>
 <wire x1="-0.35" y1="0.925" x2="0.35" y2="0.925" width="0.1016" layer="51" curve="162.394521"/>
 <wire x1="-0.35" y1="-0.925" x2="0.35" y2="-0.925" width="0.1016" layer="51" curve="-162.394521"/>
 <wire x1="0.575" y1="0.525" x2="0.575" y2="-0.525" width="0.1016" layer="51"/>
 <wire x1="-0.575" y1="-0.5" x2="-0.575" y2="0.925" width="0.1016" layer="51"/>
+<circle x="-0.45" y="0.85" radius="0.103" width="0.1016" layer="51"/>
+<smd name="C" x="0" y="1.05" dx="1.2" dy="1.2" layer="1"/>
+<smd name="A" x="0" y="-1.05" dx="1.2" dy="1.2" layer="1"/>
+<text x="-1.27" y="-1.27" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="2.54" y="-1.27" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 <rectangle x1="0.3" y1="0.5" x2="0.625" y2="1" layer="51"/>
 <rectangle x1="-0.325" y1="0.5" x2="-0.175" y2="0.75" layer="51"/>
 <rectangle x1="0.175" y1="0.5" x2="0.325" y2="0.75" layer="51"/>
@@ -1695,12 +1719,17 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <rectangle x1="-0.1" y1="0" x2="0.1" y2="0.2" layer="21"/>
 <rectangle x1="-0.6" y1="0.5" x2="-0.3" y2="0.8" layer="51"/>
 <rectangle x1="-0.625" y1="0.925" x2="-0.3" y2="1" layer="51"/>
-<smd name="A" x="0" y="-1.05" dx="1.2" dy="1.2" layer="1"/>
-<smd name="C" x="0" y="1.05" dx="1.2" dy="1.2" layer="1"/>
-<text x="-1.27" y="-1.27" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-<text x="2.54" y="-1.27" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 </package>
 </packages>
+<packages3d>
+<package3d name="CHIPLED_0805" urn="urn:adsk.eagle:package:15821/2" type="model">
+<description>CHIPLED
+Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
+<packageinstances>
+<packageinstance name="CHIPLED_0805"/>
+</packageinstances>
+</package3d>
+</packages3d>
 </library>
 <library name="SparkFun-Resistors">
 <description>&lt;h3&gt;SparkFun Resistors&lt;/h3&gt;
@@ -2993,16 +3022,21 @@ grid 2.54 mm, diameter 6 mm</description>
 </library>
 <library name="3557-2">
 <packages>
-<package name="3557-2">
-<wire x1="-9.9" y1="3.4" x2="-9.9" y2="-3.4" width="0.127" layer="21"/>
-<wire x1="-9.9" y1="-3.4" x2="9.9" y2="-3.4" width="0.127" layer="21"/>
-<wire x1="9.9" y1="-3.4" x2="9.9" y2="3.4" width="0.127" layer="21"/>
-<wire x1="9.9" y1="3.4" x2="-9.9" y2="3.4" width="0.127" layer="21"/>
-<pad name="1" x="-6.75" y="1.7" drill="1.6"/>
-<pad name="2" x="-6.75" y="-1.7" drill="1.6"/>
-<pad name="3" x="6.75" y="1.7" drill="1.6"/>
-<pad name="4" x="6.75" y="-1.7" drill="1.6"/>
-<text x="0" y="5.08" size="1" layer="25" ratio="10" align="center">&gt;NAME</text>
+<package name="FUSE_3557-2">
+<wire x1="-8.405" y1="3.365" x2="-8.405" y2="-3.365" width="0.127" layer="21"/>
+<wire x1="-8.405" y1="-3.365" x2="8.405" y2="-3.365" width="0.127" layer="21"/>
+<wire x1="8.405" y1="-3.365" x2="8.405" y2="3.365" width="0.127" layer="21"/>
+<wire x1="8.405" y1="3.365" x2="-8.405" y2="3.365" width="0.127" layer="21"/>
+<text x="-9.793059375" y="3.50466875" size="1.2717" layer="25">&gt;NAME</text>
+<text x="-9.75535" y="-4.93776875" size="1.272" layer="27">&gt;VALUE</text>
+<wire x1="-8.7" y1="3.6" x2="8.7" y2="3.6" width="0.127" layer="39"/>
+<wire x1="8.7" y1="3.6" x2="8.7" y2="-3.6" width="0.127" layer="39"/>
+<wire x1="8.7" y1="-3.6" x2="-8.7" y2="-3.6" width="0.127" layer="39"/>
+<wire x1="-8.7" y1="-3.6" x2="-8.7" y2="3.6" width="0.127" layer="39"/>
+<pad name="1" x="-5.485" y="1.7" drill="1.6"/>
+<pad name="2" x="-5.485" y="-1.7" drill="1.6"/>
+<pad name="3" x="5.485" y="1.7" drill="1.6"/>
+<pad name="4" x="5.485" y="-1.7" drill="1.6"/>
 </package>
 </packages>
 </library>
@@ -3473,13 +3507,18 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="R" x="14.986" y="-5.588" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="86.106" y="16.002" size="1.27" layer="27"/>
 </element>
-<element name="SW_PC" library="con-molex" package="22-23-2021" value="22-23-2021" x="110.498" y="55.88" smashed="yes">
+<element name="SW_PC" library="con-molex" package="22-23-2021" package3d_urn="urn:adsk.eagle:package:8078633/1" value="22-23-2021" x="110.498" y="55.88" smashed="yes">
+<attribute name="MF" value="MOLEX" x="31.758" y="22.86" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="22-23-2021" x="31.758" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="NAME" x="107.434" y="58.42" size="1.016" layer="25" ratio="10" rot="R180"/>
+<attribute name="OC_FARNELL" value="1462926" x="31.758" y="22.86" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="25C3832" x="31.758" y="22.86" size="1.778" layer="27" display="off"/>
+<attribute name="POPULARITY" value="40" x="31.758" y="22.86" size="1.778" layer="27" display="off"/>
 </element>
 <element name="PC" library="AMASS_XT60" package="XT60PW-M" value="XT60PW-M" x="90.876" y="59.436" smashed="yes">
 <attribute name="NAME" x="90.368" y="40.042" size="1" layer="25" ratio="10" align="center"/>
 </element>
-<element name="LED_PC" library="led" package="CHIPLED_0805" value="" x="105.416" y="55.624" smashed="yes" rot="R90">
+<element name="LED_PC" library="led" package="CHIPLED_0805" package3d_urn="urn:adsk.eagle:package:15821/2" value="" x="105.416" y="55.624" smashed="yes" rot="R90">
 <attribute name="NAME" x="107.194" y="54.354" size="0.6096" layer="25" rot="R180"/>
 <attribute name="POPULARITY" value="52" x="120.656" y="-14.226" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="106.686" y="58.164" size="1.27" layer="27" rot="R180"/>
@@ -3502,7 +3541,7 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="R" x="121.158" y="41.91" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="VALUE" x="82.804" y="26.924" size="1.27" layer="28" rot="MR90"/>
 </element>
-<element name="LED_SERVO" library="led" package="CHIPLED_0805" value="" x="76.708" y="3.048" smashed="yes" rot="R90">
+<element name="LED_SERVO" library="led" package="CHIPLED_0805" package3d_urn="urn:adsk.eagle:package:15821/2" value="" x="76.708" y="3.048" smashed="yes" rot="R90">
 <attribute name="NAME" x="78.486" y="4.826" size="0.6096" layer="25" rot="R180"/>
 <attribute name="POPULARITY" value="52" x="56.388" y="-33.782" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="77.978" y="5.588" size="1.27" layer="27" rot="R180"/>
@@ -3514,12 +3553,22 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="70.866" y="4.318" size="1.27" layer="27"/>
 </element>
 <element name="U$2" library="BNO055" package="BNO055" value="BNO055" x="84.328" y="40.386" smashed="yes" rot="R180"/>
-<element name="X1" library="con-molex" package="22-23-2041" value="22-23-2041" x="46.99" y="44.704" smashed="yes">
+<element name="X1" library="con-molex" package="22-23-2041" package3d_urn="urn:adsk.eagle:package:8078635/1" value="22-23-2041" x="46.99" y="44.704" smashed="yes">
+<attribute name="MF" value="MOLEX" x="46.99" y="44.704" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="22-23-2041" x="46.99" y="44.704" size="1.778" layer="27" display="off"/>
 <attribute name="NAME" x="44.196" y="48.006" size="1.016" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="1462920" x="46.99" y="44.704" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="38C0355" x="46.99" y="44.704" size="1.778" layer="27" display="off"/>
+<attribute name="POPULARITY" value="21" x="46.99" y="44.704" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="41.91" y="39.624" size="1.016" layer="27" ratio="10"/>
 </element>
-<element name="X2" library="con-molex" package="22-23-2071" value="22-23-2071" x="3.678" y="44.094" smashed="yes" rot="R90">
+<element name="X2" library="con-molex" package="22-23-2071" package3d_urn="urn:adsk.eagle:package:8078638/1" value="22-23-2071" x="3.678" y="44.094" smashed="yes" rot="R90">
+<attribute name="MF" value="MOLEX" x="3.678" y="44.094" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MPN" value="22-23-2071" x="3.678" y="44.094" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="-0.132" y="35.204" size="1.016" layer="25" ratio="10" rot="R90"/>
+<attribute name="OC_FARNELL" value="1654534" x="3.678" y="44.094" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_NEWARK" value="56H0445" x="3.678" y="44.094" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="POPULARITY" value="1" x="3.678" y="44.094" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="IC6" library="national-semiconductor" library_urn="urn:adsk.eagle:library:307" package="TO263-5" package3d_urn="urn:adsk.eagle:package:16438/2" value="LM2596S" x="88.646" y="8.636" smashed="yes" rot="MR180">
 <attribute name="MF" value="NATIONAL SEMICONDUCTOR" x="72.136" y="-7.874" size="1.778" layer="28" rot="MR180" display="off"/>
@@ -3592,14 +3641,33 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="C" x="88.854" y="30.018" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="85.933" y="27.767" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="PWR" library="con-molex" package="22-23-2021" value="22-23-2021" x="77.216" y="43.942" smashed="yes" rot="R270">
+<element name="PWR" library="con-molex" package="22-23-2021" package3d_urn="urn:adsk.eagle:package:8078633/1" value="22-23-2021" x="77.216" y="43.942" smashed="yes" rot="R270">
+<attribute name="MF" value="MOLEX" x="77.216" y="43.942" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MPN" value="22-23-2021" x="77.216" y="43.942" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="NAME" x="80.772" y="45.466" size="1.016" layer="25" ratio="10" rot="R270"/>
+<attribute name="OC_FARNELL" value="1462926" x="77.216" y="43.942" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="OC_NEWARK" value="25C3832" x="77.216" y="43.942" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="POPULARITY" value="40" x="77.216" y="43.942" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="FS_PC" library="3557-2" package="3557-2" value="3557-2" x="97.028" y="29.972" smashed="yes" rot="R90">
+<element name="FS_PC" library="3557-2" package="FUSE_3557-2" value="3557-2" x="97.028" y="29.972" smashed="yes" rot="R90">
+<attribute name="AVAILABILITY" value="In Stock" x="97.028" y="29.972" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="DESCRIPTION" value=" THM 2 in 1 Auto Blade Holder " x="97.028" y="29.972" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MF" value="Keystone Electronics" x="97.028" y="29.972" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MP" value="3557-2" x="97.028" y="29.972" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="99.709059375" y="40.43733125" size="1.2717" layer="25" rot="R180"/>
+<attribute name="PACKAGE" value="Nonstandard Keystone" x="97.028" y="29.972" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PRICE" value="None" x="97.028" y="29.972" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/3557-2/?ref=eda" x="97.028" y="29.972" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
-<element name="FS_SER" library="3557-2" package="3557-2" value="3557-2" x="49.276" y="24.638" smashed="yes" rot="R180">
+<element name="FS_SER" library="3557-2" package="FUSE_3557-2" value="3557-2" x="49.276" y="24.638" smashed="yes" rot="R180">
+<attribute name="AVAILABILITY" value="In Stock" x="49.276" y="24.638" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DESCRIPTION" value=" THM 2 in 1 Auto Blade Holder " x="49.276" y="24.638" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="Keystone Electronics" x="49.276" y="24.638" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MP" value="3557-2" x="49.276" y="24.638" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="52.719059375" y="20.62533125" size="1.2717" layer="25" rot="R180"/>
+<attribute name="PACKAGE" value="Nonstandard Keystone" x="49.276" y="24.638" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PRICE" value="None" x="49.276" y="24.638" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/3557-2/?ref=eda" x="49.276" y="24.638" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 </elements>
 <signals>
@@ -3634,6 +3702,8 @@ design rules under a new name.</description>
 <contactref element="J6" pad="1"/>
 <contactref element="J7" pad="1"/>
 <contactref element="J8" pad="1"/>
+<contactref element="BATT_CM1" pad="1"/>
+<contactref element="BATT_CM1" pad="2"/>
 <contactref element="BATT_CM1" pad="-"/>
 <contactref element="R44" pad="1"/>
 <wire x1="13.462" y1="5.319" x2="10.922" y2="5.319" width="0.254" layer="1"/>
@@ -3769,23 +3839,6 @@ design rules under a new name.</description>
 <wire x1="92.862" y1="24.638" x2="92.862" y2="29.566" width="1.27" layer="16"/>
 <wire x1="92.41" y1="30.018" x2="90.124" y2="30.018" width="1.27" layer="16"/>
 <wire x1="92.862" y1="29.566" x2="92.41" y2="30.018" width="1.27" layer="16"/>
-<wire x1="34.544" y1="21.728" x2="38.227" y2="16.9418" width="0" layer="19" extent="1-1"/>
-<wire x1="32.258" y1="21.844" x2="34.544" y2="21.728" width="0" layer="19" extent="1-1"/>
-<wire x1="29.337" y1="16.9418" x2="31.242" y2="13.716" width="0" layer="19" extent="1-1"/>
-<wire x1="24.892" y1="21.728" x2="29.337" y2="16.9418" width="0" layer="19" extent="1-1"/>
-<wire x1="22.606" y1="16.256" x2="24.892" y2="21.728" width="0" layer="19" extent="1-1"/>
-<wire x1="20.447" y1="16.9418" x2="22.606" y2="16.256" width="0" layer="19" extent="1-1"/>
-<wire x1="16.764" y1="21.728" x2="20.447" y2="16.9418" width="0" layer="19" extent="1-1"/>
-<wire x1="14.986" y1="21.59" x2="16.764" y2="21.728" width="0" layer="19" extent="1-1"/>
-<wire x1="11.557" y1="16.9418" x2="13.208" y2="13.97" width="0" layer="19" extent="1-1"/>
-<wire x1="12.192" y1="23.622" x2="14.986" y2="21.59" width="0" layer="19" extent="1-1"/>
-<wire x1="6.35" y1="22.606" x2="7.874" y2="21.728" width="0" layer="19" extent="1-1"/>
-<wire x1="34.406" y1="7.366" x2="31.242" y2="13.716" width="0" layer="19" extent="1-1"/>
-<wire x1="25.516" y1="7.366" x2="22.606" y2="13.97" width="0" layer="19" extent="1-1"/>
-<wire x1="16.626" y1="7.366" x2="13.208" y2="13.97" width="0" layer="19" extent="1-1"/>
-<wire x1="13.462" y1="5.319" x2="16.626" y2="7.366" width="0" layer="19" extent="1-1"/>
-<wire x1="17.516" y1="33.196" x2="10.922" y2="28.209" width="0" layer="19" extent="1-1"/>
-<wire x1="3.678" y1="49.174" x2="17.018" y2="47.752" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RE1">
 <contactref element="IC1" pad="2"/>
@@ -4519,11 +4572,9 @@ design rules under a new name.</description>
 <wire x1="77.343" y1="0.889" x2="64.135" y2="0.889" width="0.3048" layer="1"/>
 <wire x1="77.758" y1="1.304" x2="77.343" y2="0.889" width="0.3048" layer="1"/>
 <contactref element="FS_SER" pad="3"/>
-<wire x1="47.674" y1="22.938" x2="42.526" y2="22.938" width="1.27" layer="16"/>
+<wire x1="47.674" y1="22.938" x2="43.791" y2="22.938" width="1.27" layer="16"/>
 <wire x1="48.514" y1="16.256" x2="48.514" y2="22.098" width="1.27" layer="16"/>
 <wire x1="48.514" y1="22.098" x2="47.674" y2="22.938" width="1.27" layer="16"/>
-<contactref element="FS_SER" pad="4"/>
-<wire x1="42.526" y1="22.938" x2="42.526" y2="26.338" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$17">
 <contactref element="BATT_3" pad="+"/>
@@ -4575,12 +4626,18 @@ design rules under a new name.</description>
 <wire x1="80.01" y1="10.922" x2="80.502" y2="11.414" width="0.3048" layer="1"/>
 </signal>
 <signal name="GND_PC">
+<contactref element="BATT_3" pad="1"/>
+<contactref element="BATT_3" pad="2"/>
 <contactref element="BATT_3" pad="-"/>
+<contactref element="BATT_4" pad="1"/>
+<contactref element="BATT_4" pad="2"/>
 <contactref element="BATT_4" pad="-"/>
 <contactref element="R38" pad="1"/>
 <contactref element="R39" pad="1"/>
 <contactref element="R40" pad="1"/>
 <contactref element="SW_PC" pad="2"/>
+<contactref element="PC" pad="1"/>
+<contactref element="PC" pad="2"/>
 <contactref element="PC" pad="-"/>
 <contactref element="R42" pad="1"/>
 <polygon width="0.254" layer="1">
@@ -4650,7 +4707,6 @@ design rules under a new name.</description>
 <wire x1="78.486" y1="6.604" x2="78.486" y2="11.684" width="0.8128" layer="1"/>
 <wire x1="78.486" y1="11.684" x2="79.06" y2="12.258" width="0.8128" layer="1"/>
 <wire x1="79.06" y1="12.258" x2="79.822" y2="12.258" width="0.8128" layer="1"/>
-<wire x1="100.402" y1="55.642" x2="97.626" y2="49.436" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="N$22">
 <contactref element="Q10" pad="1"/>
@@ -4691,10 +4747,8 @@ design rules under a new name.</description>
 <wire x1="100.076" y1="53.848" x2="106.172" y2="53.848" width="0.508" layer="1"/>
 <wire x1="106.172" y1="53.848" x2="106.466" y2="54.142" width="0.508" layer="1"/>
 <contactref element="FS_PC" pad="3"/>
-<wire x1="95.328" y1="36.722" x2="95.328" y2="42.608" width="1.27" layer="16"/>
+<wire x1="95.328" y1="35.457" x2="95.328" y2="42.608" width="1.27" layer="16"/>
 <wire x1="95.328" y1="42.608" x2="94.488" y2="43.448" width="1.27" layer="16"/>
-<contactref element="FS_PC" pad="4"/>
-<wire x1="95.328" y1="36.722" x2="98.728" y2="36.722" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+3">
 <contactref element="Q12" pad="3"/>
@@ -4988,19 +5042,15 @@ design rules under a new name.</description>
 <wire x1="100.838" y1="15.494" x2="113.792" y2="15.494" width="1.27" layer="16"/>
 <wire x1="113.792" y1="15.494" x2="115.316" y2="17.018" width="1.27" layer="16"/>
 <contactref element="FS_PC" pad="1"/>
-<wire x1="95.758" y1="24.057" x2="95.328" y2="23.222" width="1.27" layer="16"/>
+<wire x1="95.758" y1="24.057" x2="95.328" y2="24.487" width="1.27" layer="16"/>
 <wire x1="95.758" y1="20.574" x2="95.758" y2="24.057" width="1.27" layer="16"/>
-<contactref element="FS_PC" pad="2"/>
-<wire x1="95.328" y1="23.222" x2="98.728" y2="23.222" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$6">
 <contactref element="Q7" pad="4"/>
 <contactref element="FS_SER" pad="1"/>
 <wire x1="69.352" y1="30.734" x2="63.065" y2="30.734" width="1.27" layer="16"/>
 <wire x1="63.065" y1="30.734" x2="55.269" y2="22.938" width="1.27" layer="16"/>
-<wire x1="55.269" y1="22.938" x2="56.026" y2="22.938" width="1.27" layer="16"/>
-<contactref element="FS_SER" pad="2"/>
-<wire x1="56.026" y1="22.938" x2="56.026" y2="26.338" width="0" layer="19" extent="1-1"/>
+<wire x1="55.269" y1="22.938" x2="54.761" y2="22.938" width="1.27" layer="16"/>
 </signal>
 </signals>
 <mfgpreviewcolors>

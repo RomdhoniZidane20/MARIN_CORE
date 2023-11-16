@@ -199,7 +199,7 @@
 <dimension x1="0" y1="60" x2="0" y2="0" x3="-2" y3="30" textsize="1.778" layer="37"/>
 <dimension x1="2.5" y1="2.5" x2="2.5" y2="57.5" x3="-7" y3="30" textsize="1.778" layer="37"/>
 <text x="25.146" y="38.608" size="1.778" layer="26" rot="MR180">Dynamixel Motor Controller
-   Designed by Andreas</text>
+   Designed by Andreas and Zidane</text>
 <text x="3.302" y="27.94" size="1.778" layer="25" rot="R90">Dynamixel Controller</text>
 <text x="96.52" y="58.42" size="1.778" layer="25" rot="R180">Powerswitch</text>
 <hole x="118" y="2" drill="3"/>
